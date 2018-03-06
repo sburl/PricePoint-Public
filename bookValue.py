@@ -5,7 +5,7 @@ def bookValue(listed, redeem, salesRank):
 
     depreciation = 0.00
 
-    #sales rank is proxy for how long book will take to sell
+    #sales rank is a proxy for liquidity - depreciation more likely for books that take longer to turn
     if salesRank > 100000:
         depreciation += 0.35
     elif salesRank > 50000:
@@ -21,7 +21,7 @@ def bookValue(listed, redeem, salesRank):
     elif salesRank > 1000:
         depreciation += 0.05
 
-    #higher priced items are more susceptible to price swings
+    #higher priced items more susceptible to price swings
     if listed > 100:
         depreciation += 0.10
     elif listed > 50:
@@ -36,7 +36,7 @@ def bookValue(listed, redeem, salesRank):
 
     net = gross - shippingAndBox
 
-    #offer is highest of value of amazon gift card / expected after margin
+    #offer is max(value of amazon gift card, amount expected after margin)
     if redeem > net:
         offer = 0.7 * redeem
     else:
